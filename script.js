@@ -1,32 +1,32 @@
 /* =========================================================
-   AHMED HACKING — CYBER THEME STYLESHEET
-   Black background + neon green glow, cyberpunk dashboard
+   AHMED HACKING — SCRIPT.JS
+   Fictional visual simulation only. No real network/hacking
+   activity is performed anywhere in this file.
    ========================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@500;700;900&display=swap');
+(function () {
+  'use strict';
 
-:root{
-  --green: #00ff66;
-  --green-bright: #39ff8a;
-  --green-dim: #0a3d1f;
-  --green-glow: rgba(0,255,102,0.65);
-  --red: #ff2b3d;
-  --bg: #020603;
-  --panel-bg: rgba(0, 15, 6, 0.55);
-  --font-mono: 'Share Tech Mono', monospace;
-  --font-display: 'Orbitron', sans-serif;
-}
+  /* ---------------------------------------------------------
+     1) MATRIX RAIN BACKGROUND (canvas)
+  --------------------------------------------------------- */
+  const canvas = document.getElementById('matrixCanvas');
+  const ctx = canvas.getContext('2d');
+  const glyphs = 'アイウエオカキクケコサシスセソ01234567890$#@%&ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  let columns, drops;
+  const fontSize = 15;
 
-*{
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    columns = Math.floor(canvas.width / fontSize);
+    drops = new Array(columns).fill(1);
+  }
 
-html, body{
-  width: 100%;
-  height: 100%;
-  background: var(--bg);
-  color: var(--green);
-  font-family: var(--font-mono);
-  overflow: hidden;
+  function drawMatrix() {
+    ctx.fillStyle = 'rgba(0, 4, 1, 0.08)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.font = fontSize + 'px monospace';
+
+    for (let i = 0; i < drops.length; i++) {
